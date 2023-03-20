@@ -1,13 +1,10 @@
-
 import os
 
 import requests
-
-
 from dotenv import load_dotenv
 
 load_dotenv()
-API_KEY = os.environ['API_KEY']
+API_KEY = os.environ["API_KEY"]
 
 
 def get_weather_data(url):
@@ -29,10 +26,14 @@ def get_weather_data(url):
         response.raise_for_status()
         data = response.json()
         if data["cod"] != 200:
-            raise requests.exceptions.HTTPError(f"Error {data['cod']}: {data['message']}")
+            raise requests.exceptions.HTTPError(
+                f"Error {data['cod']}: {data['message']}"
+            )
         return data
     except requests.exceptions.RequestException as e:
-        raise requests.exceptions.HTTPError(f"Error connecting to API: {e}") from e
+        raise requests.exceptions.HTTPError(
+            f"Error connecting to API: {e}"
+        ) from e
 
 
 def get_weather_info(data):
